@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- ========================================== -->
+    <!-- Bookstore Schema - Tests basic types,      -->
+    <!-- constraints, enumerations, and nesting     -->
+    <!-- ========================================== -->
+
+    <!-- Root element -->
+    <xs:element name="bookstore">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="book" type="BookType" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+            <xs:attribute name="location" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Book type -->
+    <xs:complexType name="BookType">
+        <xs:sequence>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="author" type="AuthorType" maxOccurs="unbounded"/>
+            <xs:element name="isbn" type="ISBNType"/>
+            <xs:element name="price" type="PriceType"/>
+            <xs:element name="year" type="YearType"/>
+            <xs:element name="genre" type="GenreType"/>
+            <xs:element name="description" type="xs:string" minOccurs="0"/>
+            <xs:element name="reviews" type="ReviewsType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="lang" type="xs:language" default="fr"/>
+    </xs:complexType>
+
+    <!-- Author type -->
+    <xs:complexType name="AuthorType">
+        <xs:sequence>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="nationality" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- ISBN restriction: 13-digit format -->
+    <xs:simpleType name="ISBNType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Price with currency attribute -->
+    <xs:complexType name="PriceType">
+        <xs:simpleContent>
+            <xs:extension base="xs:decimal">
+                <xs:attribute name="currency" type="CurrencyType" default="EUR"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Currency enumeration -->
+    <xs:simpleType name="CurrencyType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="EUR"/>
+            <xs:enumeration value="USD"/>
+            <xs:enumeration value="GBP"/>
+            <xs:enumeration value="XAF"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Year range -->
+    <xs:simpleType name="YearType">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1000"/>
+            <xs:maxInclusive value="2100"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Genre enumeration -->
+    <xs:simpleType name="GenreType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Fiction"/>
+            <xs:enumeration value="Non-Fiction"/>
+            <xs:enumeration value="Science"/>
+            <xs:enumeration value="Technology"/>
+            <xs:enumeration value="History"/>
+            <xs:enumeration value="Biography"/>
+            <xs:enumeration value="Poetry"/>
+            <xs:enumeration value="Children"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Reviews -->
+    <xs:complexType name="ReviewsType">
+        <xs:sequence>
+            <xs:element name="review" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="reviewer" type="xs:string"/>
+                        <xs:element name="rating">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:integer">
+                                    <xs:minInclusive value="1"/>
+                                    <xs:maxInclusive value="5"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="comment" type="xs:string"/>
+                    </xs:sequence>
+                    <xs:attribute name="date" type="xs:date" use="required"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

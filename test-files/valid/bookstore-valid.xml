@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Valid bookstore XML - should pass validation against bookstore.xsd -->
+<bookstore name="Librairie Centrale de Douala" location="Akwa, Douala">
+
+    <book id="1" lang="fr">
+        <title>Le Petit Prince</title>
+        <author>
+            <firstName>Antoine</firstName>
+            <lastName>de Saint-Exupéry</lastName>
+            <nationality>Française</nationality>
+        </author>
+        <isbn>978-2-07-061275-8</isbn>
+        <price currency="EUR">8.50</price>
+        <year>1943</year>
+        <genre>Fiction</genre>
+        <description>Un pilote d'avion, en panne dans le désert du Sahara, rencontre un petit garçon venu d'une autre planète.</description>
+        <reviews>
+            <review date="2024-03-15">
+                <reviewer>Marie Dupont</reviewer>
+                <rating>5</rating>
+                <comment>Un chef-d'œuvre intemporel, à lire et relire.</comment>
+            </review>
+            <review date="2024-06-22">
+                <reviewer>Jean Kamga</reviewer>
+                <rating>4</rating>
+                <comment>Très poétique et profond.</comment>
+            </review>
+        </reviews>
+    </book>
+
+    <book id="2" lang="en">
+        <title>Clean Code</title>
+        <author>
+            <firstName>Robert</firstName>
+            <lastName>Martin</lastName>
+            <nationality>American</nationality>
+        </author>
+        <isbn>978-0-13-235088-4</isbn>
+        <price currency="USD">39.99</price>
+        <year>2008</year>
+        <genre>Technology</genre>
+        <description>A handbook of agile software craftsmanship.</description>
+    </book>
+
+    <book id="3" lang="fr">
+        <title>Une vie de boy</title>
+        <author>
+            <firstName>Ferdinand</firstName>
+            <lastName>Oyono</lastName>
+            <nationality>Camerounaise</nationality>
+        </author>
+        <isbn>978-2-26-600837-3</isbn>
+        <price currency="XAF">3500.00</price>
+        <year>1956</year>
+        <genre>Fiction</genre>
+        <description>Le journal de Toundi, un jeune garçon qui découvre la réalité coloniale.</description>
+        <reviews>
+            <review date="2025-01-10">
+                <reviewer>Amina Bello</reviewer>
+                <rating>5</rating>
+                <comment>Un classique de la littérature africaine.</comment>
+            </review>
+        </reviews>
+    </book>
+
+    <book id="4">
+        <title>Sapiens: Une brève histoire de l'humanité</title>
+        <author>
+            <firstName>Yuval Noah</firstName>
+            <lastName>Harari</lastName>
+        </author>
+        <isbn>978-2-22-622936-2</isbn>
+        <price currency="EUR">24.00</price>
+        <year>2015</year>
+        <genre>History</genre>
+    </book>
+
+    <book id="5" lang="en">
+        <title>Design Patterns</title>
+        <author>
+            <firstName>Erich</firstName>
+            <lastName>Gamma</lastName>
+        </author>
+        <author>
+            <firstName>Richard</firstName>
+            <lastName>Helm</lastName>
+        </author>
+        <author>
+            <firstName>Ralph</firstName>
+            <lastName>Johnson</lastName>
+        </author>
+        <author>
+            <firstName>John</firstName>
+            <lastName>Vlissides</lastName>
+        </author>
+        <isbn>978-0-20-163361-0</isbn>
+        <price currency="USD">54.99</price>
+        <year>1994</year>
+        <genre>Technology</genre>
+        <description>Elements of Reusable Object-Oriented Software.</description>
+    </book>
+
+</bookstore>

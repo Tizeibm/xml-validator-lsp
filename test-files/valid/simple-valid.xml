@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Valid simple XML - should pass validation against simple.xsd -->
+<root version="1.0">
+    <item id="1">
+        <name>Premier élément</name>
+        <value>42</value>
+    </item>
+    <item id="2">
+        <name>Deuxième élément</name>
+        <value>100</value>
+    </item>
+    <item id="3">
+        <name>Troisième élément</name>
+        <value>-7</value>
+    </item>
+</root>

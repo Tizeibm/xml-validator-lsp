@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    MALFORMED XML - Not well-formed (parser errors, not schema errors)
+    This file should cause XML parsing errors before schema validation.
+    
+    Errors:
+    1. Unclosed tag <name>
+    2. Mismatched tags
+    3. Invalid characters in element names
+-->
+<root version="1.0">
+    <item id="1">
+        <name>This tag is never closed
+        <value>42</value>
+    </item>
+    <item id="2">
+        <name>Mismatched</title>
+        <value>100</value>
+    </item>
+    <item id="3">
+        <na me>Space in element name</na me>
+        <value>50</value>
+    </item>
+    <!-- Unclosed root tag below -->
+    <item id="4">
+        <name>Missing closing tags</name>
+        <value>75</value>
+</root>

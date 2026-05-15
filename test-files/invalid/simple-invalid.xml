@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    INVALID simple XML - Contains errors:
+    1. Missing required attribute "version" on <root>
+    2. "value" should be integer but contains text
+    3. Missing required attribute "id" on item
+    4. Empty <name> (valid but good edge case)
+    5. Wrong element order
+-->
+<root>
+    <item id="1">
+        <name>Correct item</name>
+        <value>42</value>
+    </item>
+    <item>
+        <name>Missing id attribute</name>
+        <value>not-a-number</value>
+    </item>
+    <item id="3">
+        <value>100</value>
+        <name>Wrong order - value before name</name>
+    </item>
+    <item id="4">
+        <name></name>
+        <value>999999999999999999999999999999</value>
+    </item>
+</root>

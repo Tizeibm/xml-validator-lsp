@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    INVALID employees XML - Contains multiple validation errors:
+    1.  Missing required attribute "name" on <company>
+    2.  Invalid department code "engineering" (must be 2-5 uppercase letters)
+    3.  Invalid email format on employee 1
+    4.  Negative salary (violates minInclusive=0)
+    5.  Invalid date format "15/01/2020" (should be xs:date)
+    6.  Employee 3 references non-existent department "SALES" (keyref violation)
+    7.  Duplicate employee id="1" (unique constraint violation)
+    8.  Employee 4 has BOTH fullTimeInfo AND partTimeInfo (choice violation)
+    9.  Missing required element <position>
+    10. Invalid boolean value for active="oui"
+-->
+<company founded="2015-06-01">
+
+    <departments>
+        <department code="engineering">
+            <name>Engineering</name>
+            <budget>500000.00</budget>
+        </department>
+        <department code="HR">
+            <name>Human Resources</name>
+            <budget>-50000</budget>
+        </department>
+    </departments>
+
+    <employees>
+        <!-- ERROR: invalid email format -->
+        <employee id="1" active="true">
+            <firstName>Paul</firstName>
+            <lastName>Ndongo</lastName>
+            <email>not-a-valid-email</email>
+            <departmentRef>HR</departmentRef>
+            <position>Engineer</position>
+            <salary>-500</salary>
+            <hireDate>15/01/2020</hireDate>
+            <fullTimeInfo>
+                <weeklyHours>40</weeklyHours>
+                <vacationDays>25</vacationDays>
+            </fullTimeInfo>
+        </employee>
+
+        <!-- ERROR: references non-existent department -->
+        <employee id="2" active="true">
+            <firstName>Marie</firstName>
+            <lastName>Tchinda</lastName>
+            <email>marie@test.cm</email>
+            <departmentRef>SALES</departmentRef>
+            <position>Sales Manager</position>
+            <salary>3000000</salary>
+            <hireDate>2020-06-15</hireDate>
+            <fullTimeInfo>
+                <weeklyHours>40</weeklyHours>
+                <vacationDays>20</vacationDays>
+            </fullTimeInfo>
+        </employee>
+
+        <!-- ERROR: duplicate id="1" -->
+        <employee id="1" active="oui">
+            <firstName>Duplicate</firstName>
+            <lastName>Employee</lastName>
+            <email>dup@test.cm</email>
+            <departmentRef>HR</departmentRef>
+            <!-- ERROR: missing <position> element -->
+            <salary>2000000</salary>
+            <hireDate>2021-01-01</hireDate>
+            <!-- ERROR: has BOTH fullTimeInfo and partTimeInfo (should be choice) -->
+            <fullTimeInfo>
+                <weeklyHours>40</weeklyHours>
+                <vacationDays>20</vacationDays>
+            </fullTimeInfo>
+        </employee>
+    </employees>
+
+</company>

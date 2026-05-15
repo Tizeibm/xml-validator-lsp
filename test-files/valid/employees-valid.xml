@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Valid company XML - should pass validation against employees.xsd -->
+<company name="TechCorp Cameroun" founded="2015-06-01">
+
+    <departments>
+        <department code="ENG">
+            <name>Engineering</name>
+            <budget>500000.00</budget>
+            <manager>Paul Ndongo</manager>
+        </department>
+        <department code="HR">
+            <name>Human Resources</name>
+            <budget>150000.00</budget>
+            <manager>Fatou Diallo</manager>
+        </department>
+        <department code="MKT">
+            <name>Marketing</name>
+            <budget>200000.00</budget>
+        </department>
+        <department code="FIN">
+            <name>Finance</name>
+            <budget>180000.00</budget>
+            <manager>Jacques Mbarga</manager>
+        </department>
+    </departments>
+
+    <employees>
+        <employee id="1" active="true">
+            <firstName>Paul</firstName>
+            <lastName>Ndongo</lastName>
+            <email>paul.ndongo@techcorp.cm</email>
+            <phone>+237 699 123 456</phone>
+            <departmentRef>ENG</departmentRef>
+            <position>Lead Engineer</position>
+            <salary>4500000</salary>
+            <hireDate>2015-06-01</hireDate>
+            <address>
+                <street>123 Rue de la Joie</street>
+                <city>Douala</city>
+                <postalCode>BP 1234</postalCode>
+                <country>Cameroun</country>
+            </address>
+            <fullTimeInfo>
+                <weeklyHours>40</weeklyHours>
+                <vacationDays>25</vacationDays>
+                <benefits>
+                    <benefit>Health Insurance</benefit>
+                    <benefit>Company Car</benefit>
+                    <benefit>Stock Options</benefit>
+                </benefits>
+            </fullTimeInfo>
+        </employee>
+
+        <employee id="2" active="true">
+            <firstName>Fatou</firstName>
+            <lastName>Diallo</lastName>
+            <email>fatou.diallo@techcorp.cm</email>
+            <departmentRef>HR</departmentRef>
+            <position>HR Director</position>
+            <salary>3800000</salary>
+            <hireDate>2016-01-15</hireDate>
+            <fullTimeInfo>
+                <weeklyHours>40</weeklyHours>
+                <vacationDays>28</vacationDays>
+                <benefits>
+                    <benefit>Health Insurance</benefit>
+                    <benefit>Housing Allowance</benefit>
+                </benefits>
+            </fullTimeInfo>
+        </employee>
+
+        <employee id="3" active="true">
+            <firstName>Samuel</firstName>
+            <lastName>Etame</lastName>
+            <email>samuel.etame@techcorp.cm</email>
+            <phone>+237 677 987 654</phone>
+            <departmentRef>MKT</departmentRef>
+            <position>Marketing Intern</position>
+            <salary>800000</salary>
+            <hireDate>2025-09-01</hireDate>
+            <partTimeInfo>
+                <weeklyHours>20</weeklyHours>
+                <contractEndDate>2026-03-01</contractEndDate>
+            </partTimeInfo>
+        </employee>
+
+        <employee id="4" active="false">
+            <firstName>Marie</firstName>
+            <lastName>Tchinda</lastName>
+            <email>marie.tchinda@techcorp.cm</email>
+            <departmentRef>FIN</departmentRef>
+            <position>Accountant</position>
+            <salary>2500000</salary>
+            <hireDate>2018-04-10</hireDate>
+            <address>
+                <street>45 Boulevard de la Liberté</street>
+                <city>Yaoundé</city>
+                <postalCode>BP 5678</postalCode>
+                <country>Cameroun</country>
+            </address>
+            <fullTimeInfo>
+                <weeklyHours>35</weeklyHours>
+                <vacationDays>30</vacationDays>
+            </fullTimeInfo>
+        </employee>
+    </employees>
+
+</company>

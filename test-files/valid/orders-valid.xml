@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Valid orders XML - should pass validation against orders.xsd -->
+<ord:orders xmlns:ord="http://example.com/orders"
+            exportDate="2026-05-15T14:30:00">
+
+    <ord:order orderId="ORD-2026-001" date="2026-05-10" priority="high">
+        <ord:customer customerId="C-1001">
+            <ord:name>Jean-Pierre Kamga</ord:name>
+            <ord:email>jp.kamga@email.cm</ord:email>
+            <ord:phone>+237 699 111 222</ord:phone>
+        </ord:customer>
+        <ord:items>
+            <ord:item>
+                <ord:productName>Laptop Dell XPS 15</ord:productName>
+                <ord:sku>LAP-00012345</ord:sku>
+                <ord:quantity>1</ord:quantity>
+                <ord:unitPrice>850000</ord:unitPrice>
+                <ord:discount>10</ord:discount>
+            </ord:item>
+            <ord:item>
+                <ord:productName>Souris Logitech MX Master</ord:productName>
+                <ord:sku>MOU-00056789</ord:sku>
+                <ord:quantity>2</ord:quantity>
+                <ord:unitPrice>45000</ord:unitPrice>
+            </ord:item>
+        </ord:items>
+        <ord:shipping>
+            <ord:method>express</ord:method>
+            <ord:address>
+                <ord:line1>78 Rue Joffre</ord:line1>
+                <ord:line2>Appartement 3B</ord:line2>
+                <ord:city>Douala</ord:city>
+                <ord:postalCode>BP 4000</ord:postalCode>
+                <ord:country>Cameroun</ord:country>
+            </ord:address>
+            <ord:cost>5000</ord:cost>
+        </ord:shipping>
+        <ord:total>860000</ord:total>
+        <ord:status>confirmed</ord:status>
+        <ord:notes>Livraison <ord:highlight>urgente</ord:highlight> avant le weekend, merci.</ord:notes>
+        <ord:tags>electronics premium vip-client</ord:tags>
+    </ord:order>
+
+    <ord:order orderId="ORD-2026-002" date="2026-05-12" priority="normal">
+        <ord:customer customerId="C-1002">
+            <ord:name>Amina Bello</ord:name>
+            <ord:email>amina.b@gmail.com</ord:email>
+        </ord:customer>
+        <ord:items>
+            <ord:item>
+                <ord:productName>Livre: Clean Architecture</ord:productName>
+                <ord:sku>BOK-00098765</ord:sku>
+                <ord:quantity>3</ord:quantity>
+                <ord:unitPrice>25000</ord:unitPrice>
+                <ord:discount>5</ord:discount>
+            </ord:item>
+        </ord:items>
+        <ord:shipping>
+            <ord:method>standard</ord:method>
+            <ord:address>
+                <ord:line1>12 Avenue Kennedy</ord:line1>
+                <ord:city>Yaoundé</ord:city>
+                <ord:postalCode>BP 2000</ord:postalCode>
+                <ord:country>Cameroun</ord:country>
+            </ord:address>
+            <ord:cost>2000</ord:cost>
+        </ord:shipping>
+        <ord:total>73250</ord:total>
+        <ord:status>shipped</ord:status>
+    </ord:order>
+
+    <ord:order orderId="ORD-2026-003" date="2026-05-14" priority="3">
+        <ord:customer customerId="C-1003">
+            <ord:name>Emmanuel Njoya</ord:name>
+            <ord:email>e.njoya@company.cm</ord:email>
+            <ord:phone>+237 655 333 444</ord:phone>
+        </ord:customer>
+        <ord:items>
+            <ord:item>
+                <ord:productName>Clavier Mécanique RGB</ord:productName>
+                <ord:sku>KEY-00034567</ord:sku>
+                <ord:quantity>5</ord:quantity>
+                <ord:unitPrice>35000</ord:unitPrice>
+            </ord:item>
+            <ord:item>
+                <ord:productName>Écran 27" 4K</ord:productName>
+                <ord:sku>MON-00078901</ord:sku>
+                <ord:quantity>5</ord:quantity>
+                <ord:unitPrice>250000</ord:unitPrice>
+                <ord:discount>15</ord:discount>
+            </ord:item>
+            <ord:item>
+                <ord:productName>Câble HDMI 2.1</ord:productName>
+                <ord:sku>CAB-00011111</ord:sku>
+                <ord:quantity>10</ord:quantity>
+                <ord:unitPrice>5000</ord:unitPrice>
+            </ord:item>
+        </ord:items>
+        <ord:shipping>
+            <ord:method>pickup</ord:method>
+            <ord:address>
+                <ord:line1>Zone Industrielle Bonabéri</ord:line1>
+                <ord:city>Douala</ord:city>
+                <ord:postalCode>BP 6000</ord:postalCode>
+                <ord:country>Cameroun</ord:country>
+            </ord:address>
+            <ord:cost>0</ord:cost>
+        </ord:shipping>
+        <ord:total>1487500</ord:total>
+        <ord:status>pending</ord:status>
+        <ord:notes>Commande groupée pour le bureau. <ord:highlight>Vérifier stock</ord:highlight> avant confirmation.</ord:notes>
+        <ord:tags>bulk office-supplies b2b</ord:tags>
+    </ord:order>
+
+</ord:orders>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- ========================================== -->
+    <!-- Employee Management Schema                 -->
+    <!-- Tests: choice, all, attributes, dates,     -->
+    <!--        unique constraints, key/keyref      -->
+    <!-- ========================================== -->
+
+    <xs:element name="company">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="departments">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="department" type="DepartmentType" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="employees">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="employee" type="EmployeeType" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+            <xs:attribute name="founded" type="xs:date"/>
+        </xs:complexType>
+
+        <!-- Unique constraint: employee IDs must be unique -->
+        <xs:unique name="uniqueEmployeeId">
+            <xs:selector xpath="employees/employee"/>
+            <xs:field xpath="@id"/>
+        </xs:unique>
+
+        <!-- Key: department codes -->
+        <xs:key name="deptCodeKey">
+            <xs:selector xpath="departments/department"/>
+            <xs:field xpath="@code"/>
+        </xs:key>
+
+        <!-- KeyRef: employee departmentRef must match a department code -->
+        <xs:keyref name="deptCodeRef" refer="deptCodeKey">
+            <xs:selector xpath="employees/employee"/>
+            <xs:field xpath="departmentRef"/>
+        </xs:keyref>
+    </xs:element>
+
+    <!-- Department type -->
+    <xs:complexType name="DepartmentType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="budget" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="manager" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="code" type="DeptCodeType" use="required"/>
+    </xs:complexType>
+
+    <xs:simpleType name="DeptCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z]{2,5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Employee type -->
+    <xs:complexType name="EmployeeType">
+        <xs:sequence>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="email" type="EmailType"/>
+            <xs:element name="phone" type="PhoneType" minOccurs="0"/>
+            <xs:element name="departmentRef" type="DeptCodeType"/>
+            <xs:element name="position" type="xs:string"/>
+            <xs:element name="salary" type="SalaryType"/>
+            <xs:element name="hireDate" type="xs:date"/>
+            <xs:element name="address" type="AddressType" minOccurs="0"/>
+            <!-- Choice: either full-time or part-time info -->
+            <xs:choice>
+                <xs:element name="fullTimeInfo" type="FullTimeInfoType"/>
+                <xs:element name="partTimeInfo" type="PartTimeInfoType"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="active" type="xs:boolean" default="true"/>
+    </xs:complexType>
+
+    <!-- Email pattern -->
+    <xs:simpleType name="EmailType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Phone pattern -->
+    <xs:simpleType name="PhoneType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\+?[0-9\-\s]{7,20}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Salary range -->
+    <xs:simpleType name="SalaryType">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="10000000"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Address -->
+    <xs:complexType name="AddressType">
+        <xs:all>
+            <xs:element name="street" type="xs:string"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="postalCode" type="xs:string"/>
+            <xs:element name="country" type="xs:string"/>
+        </xs:all>
+    </xs:complexType>
+
+    <!-- Full-time info -->
+    <xs:complexType name="FullTimeInfoType">
+        <xs:sequence>
+            <xs:element name="weeklyHours" type="xs:decimal"/>
+            <xs:element name="vacationDays" type="xs:positiveInteger"/>
+            <xs:element name="benefits" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="benefit" type="xs:string" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Part-time info -->
+    <xs:complexType name="PartTimeInfoType">
+        <xs:sequence>
+            <xs:element name="weeklyHours" type="xs:decimal"/>
+            <xs:element name="contractEndDate" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

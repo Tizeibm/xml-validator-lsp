@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ord="http://example.com/orders"
+           targetNamespace="http://example.com/orders"
+           elementFormDefault="qualified">
+
+    <!-- ========================================== -->
+    <!-- Orders Schema with Namespace               -->
+    <!-- Tests: namespaces, mixed content, any,     -->
+    <!--        list types, union types              -->
+    <!-- ========================================== -->
+
+    <xs:element name="orders">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="order" type="ord:OrderType" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="exportDate" type="xs:dateTime" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="OrderType">
+        <xs:sequence>
+            <xs:element name="customer" type="ord:CustomerType"/>
+            <xs:element name="items">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="item" type="ord:ItemType" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="shipping" type="ord:ShippingType"/>
+            <xs:element name="total" type="xs:decimal"/>
+            <xs:element name="status" type="ord:StatusType"/>
+            <xs:element name="notes" type="ord:NotesType" minOccurs="0"/>
+            <xs:element name="tags" type="ord:TagListType" minOccurs="0"/>
+            <!-- Allow any extension elements -->
+            <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="orderId" type="xs:string" use="required"/>
+        <xs:attribute name="date" type="xs:date" use="required"/>
+        <xs:attribute name="priority" type="ord:PriorityType" default="normal"/>
+    </xs:complexType>
+
+    <xs:complexType name="CustomerType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="phone" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="customerId" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="ItemType">
+        <xs:sequence>
+            <xs:element name="productName" type="xs:string"/>
+            <xs:element name="sku" type="ord:SKUType"/>
+            <xs:element name="quantity" type="xs:positiveInteger"/>
+            <xs:element name="unitPrice" type="xs:decimal"/>
+            <xs:element name="discount" type="ord:PercentType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- SKU format -->
+    <xs:simpleType name="SKUType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z]{3}-[0-9]{4,8}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Percentage (0-100) -->
+    <xs:simpleType name="PercentType">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Shipping -->
+    <xs:complexType name="ShippingType">
+        <xs:sequence>
+            <xs:element name="method" type="ord:ShippingMethodType"/>
+            <xs:element name="address">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="line1" type="xs:string"/>
+                        <xs:element name="line2" type="xs:string" minOccurs="0"/>
+                        <xs:element name="city" type="xs:string"/>
+                        <xs:element name="postalCode" type="xs:string"/>
+                        <xs:element name="country" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cost" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="ShippingMethodType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="standard"/>
+            <xs:enumeration value="express"/>
+            <xs:enumeration value="overnight"/>
+            <xs:enumeration value="pickup"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Status -->
+    <xs:simpleType name="StatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="pending"/>
+            <xs:enumeration value="confirmed"/>
+            <xs:enumeration value="shipped"/>
+            <xs:enumeration value="delivered"/>
+            <xs:enumeration value="cancelled"/>
+            <xs:enumeration value="returned"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Priority union type (string or integer) -->
+    <xs:simpleType name="PriorityType">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="low"/>
+                    <xs:enumeration value="normal"/>
+                    <xs:enumeration value="high"/>
+                    <xs:enumeration value="urgent"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:integer">
+                    <xs:minInclusive value="1"/>
+                    <xs:maxInclusive value="10"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+
+    <!-- Notes with mixed content -->
+    <xs:complexType name="NotesType" mixed="true">
+        <xs:sequence>
+            <xs:element name="highlight" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Tag list type -->
+    <xs:simpleType name="TagListType">
+        <xs:list itemType="xs:string"/>
+    </xs:simpleType>
+
+</xs:schema>

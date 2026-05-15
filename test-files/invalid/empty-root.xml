@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Empty root element - edge case test.
+    Should fail: missing required <item> child elements
+-->
+<root version="1.0">
+</root>

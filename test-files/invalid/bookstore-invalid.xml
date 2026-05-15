@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    INVALID bookstore XML - Contains multiple validation errors:
+    1. Line 5:  Missing required attribute "name" on <bookstore>
+    2. Line 8:  Missing required element <title> (first child should be title)
+    3. Line 15: Invalid ISBN format ("INVALID-ISBN")
+    4. Line 16: Price value is not a decimal ("gratuit")
+    5. Line 17: Year out of range (3000 > max 2100)
+    6. Line 18: Invalid genre ("Romance" not in enumeration)
+    7. Line 23: Missing required attribute "id" on second <book>
+    8. Line 33: Rating out of range (6 > max 5)
+    9. Line 37: Missing required attribute "date" on <review>
+-->
+<bookstore location="Akwa">
+
+    <book id="1" lang="fr">
+        <!-- ERROR: title element is missing, but it's required -->
+        <author>
+            <firstName>Antoine</firstName>
+            <lastName>de Saint-Exupéry</lastName>
+        </author>
+        <isbn>INVALID-ISBN</isbn>
+        <price currency="EUR">gratuit</price>
+        <year>3000</year>
+        <genre>Romance</genre>
+    </book>
+
+    <!-- ERROR: missing required attribute "id" -->
+    <book lang="en">
+        <title>Clean Code</title>
+        <author>
+            <firstName>Robert</firstName>
+            <lastName>Martin</lastName>
+        </author>
+        <isbn>978-0-13-235088-4</isbn>
+        <price currency="YEN">39.99</price>
+        <year>2008</year>
+        <genre>Technology</genre>
+        <reviews>
+            <review date="2024-01-01">
+                <reviewer>Test User</reviewer>
+                <rating>6</rating>
+                <comment>Too high rating!</comment>
+            </review>
+            <!-- ERROR: missing required "date" attribute -->
+            <review>
+                <reviewer>Another User</reviewer>
+                <rating>3</rating>
+                <comment>Missing date attribute.</comment>
+            </review>
+        </reviews>
+    </book>
+
+    <!-- ERROR: extra unexpected element -->
+    <book id="3" lang="fr">
+        <title>Test Book</title>
+        <author>
+            <firstName>Test</firstName>
+            <lastName>Author</lastName>
+        </author>
+        <isbn>978-2-07-061275-8</isbn>
+        <price>15.00</price>
+        <year>2020</year>
+        <genre>Fiction</genre>
+        <publisher>Unexpected Element</publisher>
+    </book>
+
+</bookstore>
