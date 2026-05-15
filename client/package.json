@@ -1,0 +1,60 @@
+{
+  "name": "xml-validator-lsp",
+  "displayName": "Mass XML Validator",
+  "description": "Validate massive XML files (100 GB+) against XSD schemas using a streaming Java LSP server. Zero OutOfMemoryError, zero UI freeze.",
+  "version": "1.0.0",
+  "publisher": "xml-validator",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "xmlValidator.validateHugeFile",
+        "title": "Valider un gros fichier XML",
+        "category": "XML Validator"
+      }
+    ],
+    "configuration": {
+      "title": "Mass XML Validator",
+      "properties": {
+        "xmlValidator.javaPath": {
+          "type": "string",
+          "default": "java",
+          "description": "Path to the Java 21+ executable. Defaults to 'java' (uses PATH)."
+        },
+        "xmlValidator.jvmArgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "-Xmx512m",
+            "-Xms128m"
+          ],
+          "description": "JVM arguments for the LSP server. The server uses streaming, so 512 MB is typically sufficient even for 100 GB+ files."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.0"
+  }
+}
